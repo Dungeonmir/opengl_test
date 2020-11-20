@@ -5,6 +5,7 @@ project(${PROJECT_NAME})
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
+# add_executable(${PROJECT_NAME} путь до искходников можно указать через пробел, так: src/main.cpp src/main.cpp)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)

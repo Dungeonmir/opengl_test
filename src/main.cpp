@@ -22,7 +22,7 @@ void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int 
 }
 int main(void)
 {
-    GLFWwindow* window;
+    
 
     /* Initialize the library */
     if (!glfwInit())
@@ -30,23 +30,28 @@ int main(void)
         std::cout << "glfwInit failed" << std::endl;
         return -1;
     }
-        
+    
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(g_window_size_x, g_window_size_y, "OpenGL test", NULL, NULL);
-    if (!window)
+    GLFWwindow* pwindow;
+    pwindow = glfwCreateWindow(g_window_size_x, g_window_size_y, "OpenGL test", NULL, NULL);
+    if (!pwindow)
     {
         std::cout << "glfwCreateWindow failed" << std::endl;
         glfwTerminate();
         return -1;
     }
 
-    glfwSetWindowSizeCallback(window, glfwWindowSizeCallback);
-    glfwSetKeyCallback(window, glfwKeyCallback);
+    glfwSetWindowSizeCallback(pwindow, glfwWindowSizeCallback);
+    glfwSetKeyCallback(pwindow, glfwKeyCallback);
 
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(pwindow);
 	if (!gladLoadGL())
 	{
 		std::cout<< "Can't load Glad library"<<std::endl;
@@ -57,16 +62,16 @@ int main(void)
     std::cout << "OpenGL version: " << glGetString(GL_VERSION)<<std::endl;
     
 	
-	glClearColor(1,1,0,1);
+	glClearColor(0,1,1,1);
 	
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(pwindow))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(pwindow);
 
         /* Poll for and process events */
         glfwPollEvents();
